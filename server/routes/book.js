@@ -1,13 +1,10 @@
 const express = require("express");
-const cors = require("cors");
-const supabase = require("./supabaseClient");
+const supabase = require("../supabaseClient");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+const router = express.Router();
 
 // Rota para cadastrar livro
-app.post("/api/book", async (req, res) => {
+router.post("/book", async (req, res) => {
   const { title, author, number_of_pages, year_of_publication } = req.body;
 
   const { data, error } = await supabase
@@ -19,7 +16,7 @@ app.post("/api/book", async (req, res) => {
 });
 
 // Rota para listar livros
-app.get("/api/book", async (req, res) => {
+router.get("/book", async (req, res) => {
   const { data, error } = await supabase
     .from("book")
     .select("*")
@@ -29,7 +26,7 @@ app.get("/api/book", async (req, res) => {
 });
 
 // Rota para buscar livro por ID
-app.get("/api/book/:id", async (req, res) => {
+router.get("/book/:id", async (req, res) => {
   const { id } = req.params;
   const { data, error } = await supabase
     .from("book")
@@ -41,7 +38,7 @@ app.get("/api/book/:id", async (req, res) => {
 });
 
 // Rota para atualizar livro
-app.put("/api/book/:id", async (req, res) => {
+router.put("/book/:id", async (req, res) => {
   const { id } = req.params;
   const { title, author, number_of_pages, year_of_publication } = req.body
   const { data, error } = await supabase
@@ -53,7 +50,7 @@ app.put("/api/book/:id", async (req, res) => {
 });
 
 // Rota para deletar livro
-app.delete("/api/book/:id", async (req, res) => {
+router.delete("/book/:id", async (req, res) => {
   const { id } = req.params;
   const { data, error } = await supabase
     .from("book")
@@ -63,32 +60,4 @@ app.delete("/api/book/:id", async (req, res) => {
   res.json({ message: "Livro deletado com sucesso!", data });
 });
 
-// Cadastro
-app.post("/api/signup", async (req, res) => {
-  const { email, password } = req.body;
-
-  const { data, error } = await supabase.auth.signUp({ email, password });
-  if (error) return res.status(400).json({ error: error.message });
-
-  res.json({ message: "Usuário cadastrado com sucesso!", user: data.user });
-});
-
-// Login
-app.post("/api/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) return res.status(400).json({ error: error.message });
-
-  res.json({ message: "Login realizado com sucesso!", session: data.session });
-});
-  
-// Logout
-app.post("/api/logout", async (req, res) => {
-  const { error } = await supabase.auth.signOut();
-  if (error) return res.status(400).json({ error: error.message });
-  res.json({ message: "Logout realizado!" });
-});
-
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Servidor rodando em http://localhost:${PORT}`));
+module.exports = router;
