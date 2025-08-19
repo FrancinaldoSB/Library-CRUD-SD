@@ -13,29 +13,38 @@
       <img src="@/assets/book-bg.png" alt="Book Background" class="bg-image" />
       <div class="login-box">
         <div class="login-title">Seja bem-vindo ao Arararquivo</div>
-        <form>
+        <div v-if="message" :class="['alert', message.type]">
+          {{ message.text }}
+        </div>
+        <form @submit.prevent="handleLogin">
           <label class="input-label" for="email">email</label>
           <input
             id="email"
             type="email"
             class="input"
+            v-model="email"
             placeholder="Digite seu e-mail aqui"
+            required
           />
           <label class="input-label" for="senha">senha</label>
           <input
             id="senha"
             type="password"
             class="input"
+            v-model="password"
             placeholder="Digite sua senha aqui"
+            required
           />
-          <button class="login-btn" type="submit">Login</button>
+          <button class="login-btn" type="submit" :disabled="isLoading">
+            {{ isLoading ? 'Processando...' : 'Login' }}
+          </button>
         </form>
         <div class="forgot">
           <a href="#">Esqueceu sua senha?</a>
         </div>
         <div class="register">
           Não possui cadastro?
-          <a href="#">Cadastre-se</a>
+          <router-link to="/cadastro-usuario">Cadastre-se</router-link>
         </div>
       </div>
     </div>
@@ -43,7 +52,63 @@
 </template>
 
 <script setup>
-// Nenhuma lógica adicional
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { AuthService } from '@/services/api';
+
+const router = useRouter();
+const email = ref('');
+const password = ref('');
+const isLoading = ref(false);
+const message = ref(null);
+
+onMounted(() => {
+  // Verificar se já existe um token para login automático
+  if (localStorage.getItem('token')) {
+    router.push('/dashboard');
+  }
+});
+
+const handleLogin = async () => {
+  // Limpar mensagens anteriores
+  message.value = null;
+  
+  if (!email.value || !password.value) {
+    message.value = { type: 'error', text: 'Por favor, preencha todos os campos.' };
+    return;
+  }
+  
+  try {
+    isLoading.value = true;
+    const response = await AuthService.login(email.value, password.value);
+    
+    // Verificar se o login foi bem-sucedido
+    if (response.data && response.data.session && response.data.session.access_token) {
+      // Armazenar token de sessão no localStorage
+      localStorage.setItem('token', response.data.session.access_token);
+      
+      // Mostrar mensagem de sucesso
+      message.value = { type: 'success', text: 'Login realizado com sucesso! Redirecionando...' };
+      
+      // Redirecionar para a página principal após login
+      setTimeout(() => {
+        router.push('/dashboard');
+      }, 1000);
+    } else {
+      message.value = { type: 'error', text: 'Resposta inválida do servidor.' };
+    }
+  } catch (error) {
+    console.error('Erro no login:', error);
+    
+    if (error.response && error.response.data && error.response.data.error) {
+      message.value = { type: 'error', text: error.response.data.error };
+    } else {
+      message.value = { type: 'error', text: 'Credenciais inválidas. Por favor, tente novamente.' };
+    }
+  } finally {
+    isLoading.value = false;
+  }
+};
 </script>
 
 <style scoped>
@@ -240,6 +305,25 @@ form {
   color: #90A7BB;
   text-decoration: none;
   margin-left: 2px;
+}
+
+.alert {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  font-family: 'Urbanist', sans-serif;
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }
 
 @media (max-width: 900px) {
