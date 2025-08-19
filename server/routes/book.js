@@ -5,11 +5,11 @@ const router = express.Router();
 
 // Rota para cadastrar livro
 router.post("/book", async (req, res) => {
-  const { title, author, number_of_pages, year_of_publication } = req.body;
+  const { title, author, number_of_pages, year_of_publication, image_url } = req.body;
 
   const { data, error } = await supabase
     .from("book")
-    .insert([{ title, author, number_of_pages, year_of_publication }]);
+    .insert([{ title, author, number_of_pages, year_of_publication, image_url }]);
 
   if (error) return res.status(400).json({ error: error.message });
   res.json({ message: "Livro cadastrado com sucesso!", data });
@@ -43,7 +43,7 @@ router.put("/book/:id", async (req, res) => {
   const { title, author, number_of_pages, year_of_publication } = req.body
   const { data, error } = await supabase
     .from("book")
-    .update({ title, author, number_of_pages, year_of_publication })
+    .update({ title, author, number_of_pages, year_of_publication, image_url: req.body.image_url })
     .eq("id", id);
   if (error) return res.status(400).json({ error: error.message });
   res.json({ message: "Livro atualizado com sucesso!", data });
