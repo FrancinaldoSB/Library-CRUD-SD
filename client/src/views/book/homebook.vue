@@ -9,6 +9,7 @@
           <button class="nav-btn" @click="goTo('buscar')">Buscar</button>
           <button class="nav-btn" @click="goTo('editar')">Editar</button>
           <button class="nav-btn" @click="goTo('excluir')">Excluir</button>
+          <button class="nav-btn logout-btn" @click="handleLogout">Sair</button>
         </nav>
       </div>
     </header>
@@ -77,7 +78,7 @@ function fecharModal() {
 }
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { BookService } from '@/services/api';
+import { BookService, AuthService } from '@/services/api';
 
 const router = useRouter();
 const books = ref([]);
@@ -147,6 +148,20 @@ function goTo(action) {
   if (action === 'editar') router.push('/editar');
   if (action === 'excluir') router.push('/excluir');
 }
+
+// Função de logout
+const handleLogout = async () => {
+  try {
+    await AuthService.logout();
+    localStorage.removeItem('token');
+    router.push('/');
+  } catch (error) {
+    console.error('Erro ao fazer logout:', error);
+    // Mesmo com erro, remover token e redirecionar
+    localStorage.removeItem('token');
+    router.push('/');
+  }
+};
 </script>
 
 <style scoped>
