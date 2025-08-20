@@ -54,4 +54,26 @@ export const AuthService = {
   }
 };
 
+export const BookService = {
+  getAllBooks() {
+    return api.get('/book');
+  },
+  
+  getBookById(id) {
+    return api.get(`/book/${id}`);
+  },
+  
+  createBook(bookData) {
+    return api.post('/book', bookData);
+  },
+  
+  updateBook(id, bookData) {
+    return api.put(`/book/${id}`, bookData);
+  },
+  
+  deleteBook(id) {
+    return api.delete(`/book/${id}`);
+  }
+};
+
 export default api;
