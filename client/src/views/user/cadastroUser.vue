@@ -1,22 +1,18 @@
 <template>
   <div class="container">
-    <div class="logo"@click="voltarParaLogin">
-      <img src="@/assets/arara.png" alt="Logo" />
-      <p>Arararquivos</p>
-    </div>
+    <!-- Logo e nome removidos -->
 
     <div class="auth-container">
       <div class="welcome-panel">
-        <h2>Seja Bem-Vindo!</h2>
+        <h2>Seja bem-vindo!</h2>
         <p>Preencha os campos com os seus dados</p>
       </div>
 
       <div class="form-panel">
-        <div v-if="message" :class="['alert', message.type]">
-          {{ message.text }}
-        </div>
-
         <form @submit.prevent="handleSubmit" class="form">
+          <div v-if="message" :class="['alert', message.type]">
+            {{ message.text }}
+          </div>
           <label class="input-label" for="email">Email</label>
           <input
             id="email"
@@ -166,22 +162,51 @@ const voltarParaLogin = () => {
   display: flex;
   flex-direction: column;
 }
+
 .input-label {
-  font-size: 14px;
-  margin-bottom: 5px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #222;
+  margin-bottom: 2px;
+  margin-top: 8px;
   text-transform: lowercase;
-  color: #555;
 }
+
 .input {
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  background: #f5f6fa;
-  margin-bottom: 15px;
-  font-size: 14px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  border-radius: 20px;
+  border: 1.5px solid #e0e0e0;
+  padding: 10px 16px;
+  outline: none;
+  margin-bottom: 4px;
+  background: #fff;
+  font-style: normal;
 }
-.input:focus {
-  outline: 2px solid #8da4b9;
+
+.input::placeholder {
+  font-family: 'Urbanist', sans-serif;
+  font-style: italic;
+  color: #b0b0b0;
+  font-size: 1rem;
+}
+
+.btn.primary {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: #90A7BB;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 0;
+  margin-top: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn.primary:hover:enabled {
+  background: #7c97ad;
 }
 
 .btn {
@@ -202,16 +227,25 @@ const voltarParaLogin = () => {
   background: #7b92a8;
 }
 .btn.secondary {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+  font-size: 1.1rem;
   background: transparent;
   color: #8da4b9;
-  border: 1px solid #8da4b9;
+  border: 1.5px solid #8da4b9;
+  border-radius: 20px;
+  padding: 10px 0;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 .btn.secondary:hover:enabled {
   background: #f0f3f6;
 }
 
 .alert {
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 24px;
   padding: 10px;
   border-radius: 6px;
   text-align: center;
@@ -224,27 +258,6 @@ const voltarParaLogin = () => {
 .alert.error {
   background: #f8d7da;
   color: #721c24;
-}
-
-.logo {
-  cursor: pointer;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.logo img {
-  height: 60px;
-  width: auto;
-}
-
-.logo p {
-  margin: 0;
-  font-size: 18px;
-  color: #333;
 }
 
 @media (max-width: 768px) {
@@ -263,27 +276,11 @@ const voltarParaLogin = () => {
   .form-panel {
     padding: 20px;
   }
-
-  .logo img {
-    height: 45px;
-  }
-
-  .logo p {
-    font-size: 16px;
-  }
 }
 
 @media (max-width: 480px) {
   .welcome-panel h2 {
     font-size: 20px;
-  }
-
-  .logo img {
-    height: 35px;
-  }
-
-  .logo p {
-    font-size: 14px;
   }
 }
 </style>

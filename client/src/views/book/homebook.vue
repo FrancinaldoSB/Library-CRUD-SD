@@ -42,54 +42,56 @@
     </section>
 
     <!-- Lista de livros com paginação -->
-    <BooksList 
-      :books="livrosFiltrados"
-      :current-page="paginaAtual"
-      :books-per-page="livrosPorPagina"
-      @page-change="irParaPagina"
-      @view="abrirModal"
-      @edit="abrirModalEdicao"
-      @delete="confirmarExclusao"
-      ref="booksListRef"
-    />
+    <div class="livros-container">
+      <BooksList 
+        :books="livrosFiltrados"
+        :current-page="paginaAtual"
+        :books-per-page="livrosPorPagina"
+        @page-change="irParaPagina"
+        @view="abrirModal"
+        @edit="abrirModalEdicao"
+        @delete="confirmarExclusao"
+        ref="booksListRef"
+      />
 
-    <!-- Modal de detalhes do livro -->
-    <BookDetailsModal
-      v-if="modalAberto"
-      :book="livroSelecionado"
-      @close="fecharModal"
-    />
+      <!-- Modal de detalhes do livro -->
+      <BookDetailsModal
+        v-if="modalAberto"
+        :book="livroSelecionado"
+        @close="fecharModal"
+      />
 
-    <!-- Modal de cadastro/edição de livro -->
-    <BookFormModal
-      v-if="modalCadastroAberto"
-      :book="novoLivro"
-      :is-editing="false"
-      :loading="cadastrando"
-      :message="mensagem"
-      @submit="cadastrarLivro"
-      @cancel="fecharModalCadastro"
-    />
+      <!-- Modal de cadastro/edição de livro -->
+      <BookFormModal
+        v-if="modalCadastroAberto"
+        :book="novoLivro"
+        :is-editing="false"
+        :loading="cadastrando"
+        :message="mensagem"
+        @submit="cadastrarLivro"
+        @cancel="fecharModalCadastro"
+      />
 
-    <!-- Modal de edição de livro -->
-    <BookFormModal
-      v-if="modalEdicaoAberto"
-      :book="livroEditando"
-      :is-editing="true"
-      :loading="editando"
-      :message="mensagem"
-      @submit="salvarEdicao"
-      @cancel="fecharModalEdicao"
-    />
+      <!-- Modal de edição de livro -->
+      <BookFormModal
+        v-if="modalEdicaoAberto"
+        :book="livroEditando"
+        :is-editing="true"
+        :loading="editando"
+        :message="mensagem"
+        @submit="salvarEdicao"
+        @cancel="fecharModalEdicao"
+      />
 
-    <!-- Modal de confirmação de exclusão -->
-    <DeleteConfirmationModal
-      v-if="modalExclusaoAberto"
-      :book="livroExcluindo"
-      :loading="excluindo"
-      @confirm="excluirLivro"
-      @cancel="cancelarExclusao"
-    />
+      <!-- Modal de confirmação de exclusão -->
+      <DeleteConfirmationModal
+        v-if="modalExclusaoAberto"
+        :book="livroExcluindo"
+        :loading="excluindo"
+        @confirm="excluirLivro"
+        @cancel="cancelarExclusao"
+      />
+    </div>
   </div>
 </template>
 
@@ -561,6 +563,162 @@ async function excluirLivro() {
 
 .resultado-pesquisa.nenhum {
   color: #f44336;
+}
+
+/* Container de livros */
+.livros-container {
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0 0 0;
+  margin: 0;
+}
+
+.livros-header {
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 4px 48px 0 48px;
+}
+
+.livros-title {
+  font-family: 'Tilt Warp', cursive;
+  font-size: 2rem;
+  color: #535F6A;
+  margin: 0;
+}
+
+.livros-pagination {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.page-btn {
+  background: #90A7BB;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  margin: 0 4px;
+  transition: background 0.2s;
+}
+
+.page-btn:hover {
+  background: #7c97ad;
+}
+
+.page-info {
+  font-family: 'Urbanist', sans-serif;
+  color: #535F6A;
+  margin: 0 8px;
+}
+
+/* Estilos para os modais */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #535F6A;
+}
+
+/* Estilos para os botões de ação nos modais */
+.btn-modal {
+  background: #90A7BB;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-modal:hover {
+  background: #7c97ad;
+}
+
+/* Estilos para os formulários nos modais */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.label {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 500;
+  color: #535F6A;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #90A7BB;
+}
+
+.error-message {
+  color: #f44336;
+  font-size: 0.875rem;
+  margin-top: 4px;
+}
+
+/* Estilos para o modal de confirmação */
+.confirmation-message {
+  font-family: 'Urbanist', sans-serif;
+  color: #535F6A;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.btn-confirm {
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-confirm:hover {
+  background: #d32f2f;
 }
 
 @media (max-width: 900px) {

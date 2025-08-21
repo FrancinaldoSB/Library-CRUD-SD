@@ -6,13 +6,17 @@
         <div class="brand">Arararquivos</div>
       </div>
       <div class="slogan-container">
-        <div class="slogan">Gerenciar livros nunca ficou tão mais fácil</div>
+        <transition-group name="slogan-fade" tag="div" class="slogan-carousel">
+          <div class="slogan" :key="currentSloganIndex">
+            {{ slogans[currentSloganIndex] }}
+          </div>
+        </transition-group>
       </div>
     </div>
     <div class="right-panel">
       <img src="@/assets/book-bg.png" alt="Book Background" class="bg-image" />
       <div class="login-box">
-        <div class="login-title">Seja bem-vindo ao Arararquivo</div>
+  <div class="login-title">Seja bem-vindo ao Arararquivos</div>
         <div v-if="message" :class="['alert', message.type]">
           {{ message.text }}
         </div>
@@ -52,7 +56,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { AuthService } from '@/services/api';
 
@@ -62,11 +66,34 @@ const password = ref('');
 const isLoading = ref(false);
 const message = ref(null);
 
+const slogans = [
+  'Gerenciar livros nunca ficou tão mais fácil',
+  'O jeito inteligente de cuidar dos seus livros',
+  'Organizar livros nunca foi tão Dattebayo',
+  'A gestão dos livros que até Hermione aprovaria',
+  'Nem Smaug acumularia tantos tesouros literários',
+  'Leveza e praticidade para quem ama livros',
+  'Amor verdadeiro é nunca perder um livro de vista',
+  'Que a organização esteja com você',
+  'Nem nas sombras você perde seus livro',
+  'Sua biblioteca, seu mapa do tesouro',
+];
+const currentSloganIndex = ref(0);
+let sloganInterval = null;
+
 onMounted(() => {
   // Verificar se já existe um token para login automático
   if (localStorage.getItem('token')) {
     router.push('/dashboard');
   }
+  // Iniciar carrossel de slogans
+  sloganInterval = setInterval(() => {
+    currentSloganIndex.value = (currentSloganIndex.value + 1) % slogans.length;
+  }, 4500);
+});
+
+onUnmounted(() => {
+  if (sloganInterval) clearInterval(sloganInterval);
 });
 
 const handleLogin = async () => {
@@ -164,16 +191,48 @@ const handleLogin = async () => {
   display: flex;
   align-items: flex-start;
   width: 100%;
-  margin-top: 120px; /* Ajuste para descer um pouco o slogan */
+  margin-top: 160px;
+  min-height: 60px;
+  position: relative;
+}
+
+.slogan-carousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  min-height: 60px;
+}
+
+.slogan-fade-enter-active, .slogan-fade-leave-active {
+  transition: opacity 0.7s cubic-bezier(.77,0,.18,1), transform 0.7s cubic-bezier(.77,0,.18,1);
+  position: absolute;
+  width: 100%;
+}
+.slogan-fade-enter-from {
+  opacity: 0;
+  transform: translateX(60px);
+}
+.slogan-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-60px);
+}
+.slogan-carousel {
+  position: relative;
+  width: 100%;
+  min-height: 60px;
 }
 
 .slogan {
   font-family: 'Tilt Warp', cursive;
-  font-size: 1.5rem;
+  font-size: 2.4rem;
   font-weight: 600;
   color: #111;
   margin-left: 4px;
-  max-width: 260px;
+  max-width: 100%;
+  width: 100%;
+  white-space: normal;
 }
 
 .right-panel {
@@ -219,7 +278,7 @@ const handleLogin = async () => {
 
 .login-title {
   font-family: 'Tilt Warp', cursive;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: bold;
   margin-bottom: 24px;
   color: #222;
