@@ -212,9 +212,14 @@ function submitForm() {
 }
 
 .cadastrar-btn {
-  background: #90A7BB;
+  background: #A8E6A3;
   margin-right: 10px;
   margin-top: 0;
+  color: #1E1E1E;
+}
+
+.cadastrar-btn:hover:not(:disabled) {
+  background: #7FC97F;
 }
 
 .cancelar-btn {

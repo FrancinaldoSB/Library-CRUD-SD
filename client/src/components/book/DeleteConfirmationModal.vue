@@ -1,11 +1,11 @@
 <template>
   <div class="modal-overlay" @click.self="$emit('cancel')">
     <div class="modal-content confirmacao">
-      <h2>Confirmar Exclusão</h2>
+  <h2 class="modal-title">Confirmar exclusão</h2>
       <p>Tem certeza que deseja excluir o livro "{{ book?.title }}"?</p>
       <div class="form-buttons">
         <button @click="$emit('confirm')" class="modal-fechar excluir-btn" :disabled="loading">
-          {{ loading ? 'Excluindo...' : 'Sim, Excluir' }}
+          {{ loading ? 'Excluindo...' : 'Sim, excluir' }}
         </button>
         <button @click="$emit('cancel')" class="modal-fechar cancelar-btn">Cancelar</button>
       </div>
@@ -64,8 +64,18 @@ defineEmits(['confirm', 'cancel']);
 
 .modal-content.confirmacao {
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   max-width: 400px;
+}
+
+.modal-title {
+  font-family: 'Tilt Warp', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1E1E1E;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
 }
 
 .modal-content.confirmacao p {
@@ -76,7 +86,8 @@ defineEmits(['confirm', 'cancel']);
 
 .form-buttons {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 16px;
   width: 100%;
   margin-top: 20px;
 }
@@ -94,16 +105,23 @@ defineEmits(['confirm', 'cancel']);
 }
 
 .excluir-btn {
-  background: #DB4437;
+  background: #90A7BB;
+  color: #fff;
   margin-right: 10px;
+  margin-top: 0;
 }
 
 .excluir-btn:hover:not(:disabled) {
-  background: #C53929;
+  background: #DB4437;
+  color: #fff;
 }
 
 .cancelar-btn {
-  background: #c0c0c0;
+  background: #90A7BB;
+  color: #fff;
+}
+.cancelar-btn:hover {
+  background: #7c97ad;
 }
 
 .modal-fechar:hover {
