@@ -4,9 +4,6 @@
       <span class="pagina-indicador">Página {{ currentPage + 1 }} de {{ totalPages }}</span>
     </div>
     <div class="livros-navegacao">
-      <button class="arrow-btn left" @click="prevPage" :disabled="currentPage === 0">
-        <img src="@/assets/arrow.png" alt="Anterior" class="arrow-img left" />
-      </button>
       <div class="livros-list">
         <div 
           v-for="(book, idx) in booksOnPage" 
@@ -30,18 +27,25 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="livros-circulos-navegacao">
+      <button class="arrow-btn left" @click="prevPage" :disabled="currentPage === 0">
+        <img src="@/assets/arrow.png" alt="Anterior" class="arrow-img left" />
+      </button>
+      <div class="livros-circulos">
+        <span 
+          v-for="idx in 5" 
+          :key="idx-1" 
+          class="circulo" 
+          :class="{ ativo: idx-1 === currentPage }" 
+          @click="goToPage(idx-1)"
+        >
+          <span class="circulo-num">{{ idx }}</span>
+        </span>
+      </div>
       <button class="arrow-btn right" @click="nextPage" :disabled="currentPage === totalPages - 1">
         <img src="@/assets/arrow.png" alt="Próxima" class="arrow-img right" />
       </button>
-    </div>
-    <div class="livros-circulos">
-      <span 
-        v-for="(p, idx) in totalPages" 
-        :key="idx" 
-        class="circulo" 
-        :class="{ ativo: idx === currentPage }" 
-        @click="goToPage(idx)"
-      ></span>
     </div>
   </section>
 </template>
@@ -250,22 +254,69 @@ defineExpose({
   100% { transform: scale(1); box-shadow: 0 2px 8px rgba(83,95,106,0.04); }
 }
 
+.livros-circulos-navegacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 32px auto 0 auto;
+  width: 100%;
+  max-width: 480px;
+  position: relative;
+  z-index: 2;
+}
 .livros-circulos {
   display: flex;
   gap: 12px;
-  justify-content: center;
   align-items: center;
-  margin: 18px 0 24px 0;
+  justify-content: center;
+  width: 100%;
+}
+.arrow-btn.left, .arrow-btn.right {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: filter 0.2s;
+}
+.arrow-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.arrow-img.left, .arrow-img.right {
+  width: 28px;
+  height: 28px;
 }
 
 .circulo {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: #e0e0e0;
   cursor: pointer;
   transition: background 0.2s;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #535F6A;
+  user-select: none;
+}
+.circulo.ativo {
+  background: #535F6A;
+  color: #fff;
+}
+.circulo-num {
+  display: block;
+  width: 100%;
+  text-align: center;
 }
 
 .circulo.ativo {
