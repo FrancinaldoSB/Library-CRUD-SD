@@ -1,7 +1,7 @@
 <template>
   <div class="modal-overlay" @click.self="$emit('cancel')">
     <div class="modal-content">
-      <h2>{{ isEditing ? 'Editar Livro' : 'Cadastrar Novo Livro' }}</h2>
+  <h2 class="modal-title">{{ isEditing ? 'Editar Livro' : 'Cadastrar Novo Livro' }}</h2>
       
       <div v-if="message" :class="['alert', message.type]">
         {{ message.text }}
@@ -9,29 +9,29 @@
       
       <form @submit.prevent="submitForm" class="form-cadastro">
         <div class="form-group">
-          <label for="titulo">Título:</label>
+          <label class="form-label" for="titulo">Título:</label>
           <input 
             id="titulo" 
             v-model="formData.title" 
             type="text" 
             required 
             placeholder="Digite o título do livro"
+            class="form-input"
           />
         </div>
-        
         <div class="form-group">
-          <label for="autor">Autor:</label>
+          <label class="form-label" for="autor">Autor:</label>
           <input 
             id="autor" 
             v-model="formData.author" 
             type="text" 
             required 
             placeholder="Digite o nome do autor"
+            class="form-input"
           />
         </div>
-        
         <div class="form-group">
-          <label for="paginas">Número de Páginas:</label>
+          <label class="form-label" for="paginas">Número de Páginas:</label>
           <input 
             id="paginas" 
             v-model="formData.number_of_pages" 
@@ -39,33 +39,34 @@
             min="1" 
             required 
             placeholder="Digite o número de páginas"
+            class="form-input"
           />
         </div>
-        
         <div class="form-group">
-          <label for="data">Data de Publicação:</label>
+          <label class="form-label" for="data">Data de Publicação:</label>
           <input 
             id="data" 
             v-model="formData.publication_date" 
             type="date" 
             required 
             placeholder="Selecione a data de publicação"
+            class="form-input"
           />
         </div>
-        
         <div class="form-group">
-          <label for="imagem">URL da Imagem:</label>
+          <label class="form-label" for="imagem">URL da Imagem:</label>
           <input 
             id="imagem" 
             v-model="formData.image_url" 
             type="url" 
             placeholder="Digite a URL da imagem de capa (opcional)"
+            class="form-input"
           />
         </div>
         
-        <div class="form-buttons">
+        <div class="form-buttons form-buttons-center">
           <button type="submit" class="modal-fechar cadastrar-btn" :disabled="loading">
-            {{ loading ? (isEditing ? 'Salvando...' : 'Cadastrando...') : (isEditing ? 'Salvar Alterações' : 'Cadastrar Livro') }}
+            {{ loading ? (isEditing ? 'Salvando...' : 'Cadastrando...') : (isEditing ? 'Salvar alterações' : 'Cadastrar livro') }}
           </button>
           <button type="button" class="modal-fechar cancelar-btn" @click="$emit('cancel')">Cancelar</button>
         </div>
@@ -235,5 +236,38 @@ function submitForm() {
 
 .modal-fechar:hover {
   background: #2c3e50;
+}
+.modal-title {
+  font-family: 'Tilt Warp', cursive;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #1E1E1E;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+.form-label {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+  color: #1E1E1E;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+.form-input {
+  font-family: 'Urbanist', sans-serif;
+  font-style: italic;
+  color: #1E1E1E;
+}
+.form-input::placeholder {
+  font-family: 'Urbanist', sans-serif;
+  font-style: italic;
+  color: #1E1E1E;
+}
+.form-buttons-center {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 20px;
 }
 </style>
