@@ -437,20 +437,24 @@ async function excluirLivro() {
   background: #fff;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 /* Cabeçalho */
 .header {
-  width: 100vw;
+  width: 100%;
   background: #fff;
   margin: 0;
   padding: 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 .header-content {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 32px;
   padding: 0 48px;
   height: 80px;
@@ -491,7 +495,7 @@ async function excluirLivro() {
 .efeito-bg {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   background: url('@/assets/efeito-bg.png') center/cover no-repeat;
   z-index: 1;
@@ -499,18 +503,19 @@ async function excluirLivro() {
 .apresentacao-content {
   position: relative;
   z-index: 2;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 20px;
 }
 .apresentacao-text {
   font-family: 'Tilt Warp', cursive;
   font-size: 2rem;
   color: #535F6A;
   text-align: center;
-  width: 100vw;
+  max-width: 100%;
 }
 
 /* Barra de pesquisa */
@@ -518,7 +523,7 @@ async function excluirLivro() {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px 16px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -574,156 +579,120 @@ async function excluirLivro() {
   align-items: center;
   padding: 4px 0 0 0;
   margin: 0;
+  flex: 1;
 }
 
-.livros-header {
-  width: 100vw;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 4px 48px 0 48px;
-}
-
-.livros-title {
-  font-family: 'Tilt Warp', cursive;
-  font-size: 2rem;
-  color: #535F6A;
-  margin: 0;
-}
-
-.livros-pagination {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.page-btn {
-  background: #90A7BB;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 16px;
-  cursor: pointer;
-  margin: 0 4px;
-  transition: background 0.2s;
-}
-
-.page-btn:hover {
-  background: #7c97ad;
-}
-
-.page-info {
-  font-family: 'Urbanist', sans-serif;
-  color: #535F6A;
-  margin: 0 8px;
-}
-
-/* Estilos para os modais */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #fff;
-  border-radius: 8px;
-  padding: 24px;
-  max-width: 600px;
-  width: 90%;
-  position: relative;
-}
-
-.close-modal {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: #535F6A;
-}
-
-/* Estilos para os botões de ação nos modais */
-.btn-modal {
-  background: #90A7BB;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-modal:hover {
-  background: #7c97ad;
-}
-
-/* Estilos para os formulários nos modais */
-.form-group {
-  margin-bottom: 16px;
-}
-
-.label {
-  font-family: 'Urbanist', sans-serif;
-  font-weight: 500;
-  color: #535F6A;
-  margin-bottom: 8px;
-  display: block;
-}
-
-.input {
-  width: 100%;
-  padding: 12px 16px;
-  font-family: 'Urbanist', sans-serif;
-  font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  outline: none;
-}
-
-.input:focus {
-  border-color: #90A7BB;
-}
-
-.error-message {
-  color: #f44336;
-  font-size: 0.875rem;
-  margin-top: 4px;
-}
-
-/* Estilos para o modal de confirmação */
-.confirmation-message {
-  font-family: 'Urbanist', sans-serif;
-  color: #535F6A;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.btn-confirm {
-  background: #f44336;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.btn-confirm:hover {
-  background: #d32f2f;
+/* Media queries aprimoradas */
+@media (max-width: 1024px) {
+  .header-content {
+    padding: 0 24px;
+  }
+  
+  .apresentacao-text {
+    font-size: 1.8rem;
+  }
 }
 
 @media (max-width: 900px) {
   .header-content {
     padding: 0 16px;
+  }
+  
+  .logo-arara {
+    height: 48px;
+  }
+  
+  .nav-btn {
+    font-size: 1.1rem;
+  }
+  
+  .apresentacao-text {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .apresentacao-container {
+    height: 140px;
+  }
+  
+  .apresentacao-text {
+    font-size: 1.4rem;
+  }
+  
+  .nav-menu {
+    gap: 16px;
+  }
+  
+  .pesquisa-container {
+    padding: 16px;
+  }
+  
+  .input-pesquisa, .btn-pesquisa {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-content {
+    padding: 0 12px;
+    height: 70px;
+  }
+  
+  .logo-arara {
+    height: 40px;
+  }
+  
+  .nav-btn {
+    font-size: 1rem;
+    padding: 0 5px;
+  }
+  
+  .apresentacao-container {
+    height: 120px;
+  }
+  
+  .apresentacao-text {
+    font-size: 1.2rem;
+  }
+  
+  .pesquisa-container {
+    padding: 12px;
+  }
+  
+  .resultado-pesquisa {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .header-content {
+    padding: 0 8px;
+  }
+  
+  .nav-menu {
+    gap: 10px;
+  }
+  
+  .logo-arara {
+    height: 36px;
+  }
+  
+  .nav-btn {
+    font-size: 0.9rem;
+  }
+  
+  .apresentacao-container {
+    height: 100px;
+  }
+  
+  .apresentacao-text {
+    font-size: 1rem;
+  }
+  
+  .btn-pesquisa {
+    padding: 10px 12px;
   }
 }
 </style>

@@ -144,6 +144,9 @@ function submitForm() {
   align-items: center;
   justify-content: center;
   animation: fadeInBg 0.2s;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
 @keyframes fadeInBg {
@@ -156,8 +159,9 @@ function submitForm() {
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   padding: 40px 48px;
-  min-width: 420px;
-  max-width: 90vw;
+  min-width: 320px;
+  width: 90%;
+  max-width: 500px;
   animation: fadeInModal 0.25s cubic-bezier(.4,0,.2,1);
 }
 
@@ -274,5 +278,55 @@ function submitForm() {
   gap: 16px;
   width: 100%;
   margin-top: 20px;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 30px;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 25px 20px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .form-buttons-center {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .cadastrar-btn, .cancelar-btn {
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 20px 15px;
+    width: 95%;
+  }
+  
+  .form-label {
+    font-size: 0.9rem;
+  }
+  
+  .form-input {
+    font-size: 0.9rem;
+  }
+  
+  .modal-fechar {
+    font-size: 0.9rem;
+  }
 }
 </style>

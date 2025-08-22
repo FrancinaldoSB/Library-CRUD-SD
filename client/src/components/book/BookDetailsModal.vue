@@ -40,6 +40,8 @@ function closeModal() {
   align-items: center;
   justify-content: center;
   animation: fadeInBg 0.2s;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 @keyframes fadeInBg {
@@ -56,8 +58,9 @@ function closeModal() {
   align-items: center;
   gap: 32px;
   padding: 40px 48px;
-  min-width: 420px;
+  min-width: 320px;
   max-width: 90vw;
+  width: auto;
   animation: fadeInModal 0.25s cubic-bezier(.4,0,.2,1);
 }
 
@@ -105,5 +108,61 @@ function closeModal() {
 
 .modal-fechar:hover {
   background: #2c3e50;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 30px;
+    gap: 24px;
+  }
+  
+  .modal-capa {
+    width: 120px;
+    height: 180px;
+  }
+  
+  .modal-info h2 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    flex-direction: column;
+    padding: 25px;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .modal-capa {
+    width: 120px;
+    height: 180px;
+  }
+  
+  .modal-info {
+    align-items: center;
+  }
+  
+  .modal-fechar {
+    align-self: center;
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 20px 15px;
+  }
+  
+  .modal-info h2 {
+    font-size: 1.2rem;
+  }
+  
+  .modal-info p {
+    font-size: 0.9rem;
+  }
 }
 </style>

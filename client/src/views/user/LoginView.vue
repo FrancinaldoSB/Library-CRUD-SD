@@ -385,30 +385,102 @@ form {
   border: 1px solid #f5c6cb;
 }
 
+/* Media queries aprimoradas */
+@media (max-width: 1200px) {
+  .bg-image {
+    left: 100px;
+    right: 0;
+  }
+  .slogan {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
     height: auto;
-    width: 100vw;
+    min-height: 100vh;
   }
+  
   .left-panel, .right-panel {
     width: 100vw;
     min-width: unset;
     border-radius: 0;
+  }
+  
+  .left-panel {
     height: auto;
+    padding: 40px 24px;
+    border-radius: 0;
   }
+  
+  .right-panel {
+    padding: 40px 0;
+    min-height: 60vh;
+  }
+  
+  .slogan-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
   .login-box {
-    width: 90vw;
-    min-width: 0;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
   }
+  
   .bg-image {
     left: 0;
     right: 0;
-    height: 40vw;
-    max-width: 100vw;
+    width: 100%;
+    height: auto;
+    opacity: 0.2;
   }
+}
+
+@media (max-width: 600px) {
+  .login-box {
+    padding: 24px 20px;
+  }
+  
+  .slogan {
+    font-size: 1.7rem;
+  }
+  
+  .logo-brand-row {
+    margin-bottom: 20px;
+  }
+  
+  .input, .input::placeholder, .input-label {
+    font-size: 0.9rem;
+  }
+  
+  .login-btn {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .login-box {
+    width: 95%;
+    padding: 20px 16px;
+  }
+  
+  .slogan {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-height: 700px) {
   .slogan-container {
-    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .left-panel {
+    padding: 30px 24px;
   }
 }
 </style>
