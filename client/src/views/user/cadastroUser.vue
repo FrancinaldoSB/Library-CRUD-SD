@@ -110,7 +110,7 @@ const voltarParaLogin = () => {
 .container {
   display: flex;
   font-family: 'Tilt Warp', sans-serif;
-  height: 100vh;
+  min-height: 100vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -118,13 +118,16 @@ const voltarParaLogin = () => {
   margin: 0 auto;
   padding: 20px;
   position: relative;
+  box-sizing: border-box;
 }
 
 .auth-container {
   display: flex;
   flex-direction: row;
+  min-height: 500px;
   height: 75vh;
   width: 90%;
+  max-width: 1000px;
   background: #ffffff;
   font-family: 'Segoe UI', sans-serif;
   border-radius: 16px;
@@ -260,27 +263,87 @@ const voltarParaLogin = () => {
   color: #721c24;
 }
 
+/* Media queries aprimoradas */
+@media (max-width: 900px) {
+  .auth-container {
+    width: 95%;
+    max-width: 600px;
+  }
+}
+
 @media (max-width: 768px) {
   .auth-container {
     flex-direction: column;
     height: auto;
-    width: 100%;
+    min-height: auto;
+    width: 95%;
   }
 
   .welcome-panel {
     border-radius: 16px 16px 0 0;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
+    min-height: 150px;
   }
 
   .form-panel {
-    padding: 20px;
+    padding: 30px 20px;
+  }
+  
+  .form {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .auth-container {
+    width: 100%;
+    border-radius: 12px;
+  }
+  
+  .welcome-panel {
+    padding: 25px 15px;
+  }
+  
+  .form-panel {
+    padding: 25px 15px;
+  }
+  
+  .welcome-panel h2 {
+    font-size: 22px;
+  }
+  
+  .input, .input::placeholder, .input-label {
+    font-size: 0.9rem;
+  }
+  
+  .btn {
+    font-size: 0.9rem;
   }
 }
 
 @media (max-width: 480px) {
   .welcome-panel h2 {
     font-size: 20px;
+  }
+  
+  .welcome-panel p {
+    font-size: 14px;
+  }
+  
+  .form-panel {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-height: 700px) {
+  .auth-container {
+    height: auto;
+    min-height: auto;
   }
 }
 </style>

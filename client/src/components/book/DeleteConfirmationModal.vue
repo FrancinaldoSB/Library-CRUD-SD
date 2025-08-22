@@ -40,6 +40,8 @@ defineEmits(['confirm', 'cancel']);
   align-items: center;
   justify-content: center;
   animation: fadeInBg 0.2s;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 @keyframes fadeInBg {
@@ -52,8 +54,9 @@ defineEmits(['confirm', 'cancel']);
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.18);
   padding: 40px 48px;
-  min-width: 420px;
-  max-width: 90vw;
+  min-width: 320px;
+  width: 90%;
+  max-width: 400px;
   animation: fadeInModal 0.25s cubic-bezier(.4,0,.2,1);
 }
 
@@ -65,7 +68,7 @@ defineEmits(['confirm', 'cancel']);
 .modal-content.confirmacao {
   flex-direction: column;
   align-items: center;
-  max-width: 400px;
+  text-align: center;
 }
 
 .modal-title {
@@ -102,6 +105,8 @@ defineEmits(['confirm', 'cancel']);
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
+  flex: 1;
+  max-width: 150px;
 }
 
 .excluir-btn {
@@ -126,5 +131,48 @@ defineEmits(['confirm', 'cancel']);
 
 .modal-fechar:hover {
   background: #2c3e50;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 25px 20px;
+  }
+  
+  .modal-title {
+    font-size: 1.3rem;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .modal-fechar {
+    max-width: none;
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .modal-content {
+    padding: 20px 15px;
+    width: 95%;
+  }
+  
+  .modal-content.confirmacao p {
+    font-size: 0.9rem;
+  }
+  
+  .modal-fechar {
+    font-size: 0.9rem;
+  }
 }
 </style>

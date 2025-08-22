@@ -146,14 +146,16 @@ defineExpose({
   align-items: center;
   padding: 48px 0 0 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
 .livros-header {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 4px 48px 0 48px;
+  box-sizing: border-box;
 }
 
 .pagina-indicador {
@@ -164,7 +166,7 @@ defineExpose({
 }
 
 .livros-navegacao {
-  width: 100vw;
+  width: 100%;
   min-height: 240px;
   position: relative;
   display: flex;
@@ -368,13 +370,146 @@ defineExpose({
   background: rgba(0, 0, 0, 0.1);
 }
 
+/* Media queries aprimorados */
+@media (max-width: 1024px) {
+  .arrow-btn.left {
+    left: 20px;
+  }
+  
+  .arrow-btn.right {
+    right: 20px;
+  }
+}
+
 @media (max-width: 900px) {
   .livros-header {
     padding: 0 16px;
   }
   
   .livros-list {
-    gap: 16px;
+    gap: 24px;
+    min-width: 360px;
+    width: 480px;
+  }
+  
+  .livro-card {
+    width: 130px;
+    height: 190px;
+  }
+}
+
+@media (max-width: 768px) {
+  .livros-container {
+    padding: 32px 0 0 0;
+  }
+  
+  .livros-list {
+    gap: 20px;
+    min-width: 280px;
+    width: 360px;
+  }
+  
+  .livro-card {
+    width: 110px;
+    height: 160px;
+  }
+  
+  .pagina-indicador {
+    font-size: 0.9rem;
+  }
+  
+  .livros-navegacao {
+    min-height: 200px;
+  }
+  
+  .arrow-btn {
+    height: 200px;
+  }
+  
+  .arrow-img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .circulo {
+    width: 22px;
+    height: 22px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .livros-actions {
+    opacity: 1;
+  }
+  
+  .livros-container {
+    padding: 20px 0 0 0;
+  }
+  
+  .livros-list {
+    flex-direction: column;
+    gap: 30px;
+    min-width: 150px;
+    width: 150px;
+    min-height: 500px;
+  }
+  
+  .livro-card {
+    width: 150px;
+    height: 220px;
+  }
+  
+  .arrow-btn.left {
+    left: 10px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  
+  .arrow-btn.right {
+    right: 10px;
+    transform: translateY(-50%) rotate(90deg);
+  }
+  
+  .arrow-img.left {
+    transform: rotate(0);
+  }
+  
+  .arrow-img.right {
+    transform: rotate(180deg);
+  }
+  
+  .livros-navegacao {
+    min-height: 600px;
+  }
+  
+  .arrow-btn {
+    height: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .livros-navegacao {
+    min-height: 500px;
+  }
+  
+  .arrow-btn {
+    height: 500px;
+    padding: 0 5px;
+  }
+  
+  .arrow-img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .livros-circulos-navegacao {
+    margin: 24px auto 0 auto;
+  }
+  
+  .circulo {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
   }
 }
 </style>

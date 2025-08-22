@@ -23,5 +23,23 @@ body, html {
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Media queries globais */
+@media (max-width: 600px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 400px) {
+  html {
+    font-size: 14px;
+  }
 }
 </style>
