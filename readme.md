@@ -2,6 +2,8 @@
 
 Sistema de gerenciamento de biblioteca desenvolvido para a disciplina de Sistemas Distribuídos. Este projeto consiste em uma aplicação web que permite aos usuários cadastrar, visualizar, editar e excluir registros de livros.
 
+Link da apresentação no Youtube: www.youtube.com/watch?si=uRPR8Fz3Kx6z1k7_&v=sGoLqJawxeY&feature=youtu.be
+
 ## 📋 Requisitos
 
 ### Backend
